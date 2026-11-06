@@ -10,7 +10,7 @@ export default function Beranda() {
           Makanan, minuman, dan camilan. Pesan tiketnya di sini.
         </p>
         <Link
-          href="/event"
+          href="/menu"
           className="mt-6 inline-block rounded-lg bg-blue-600 px-5 py-2.5 font-medium text-white hover:bg-blue-700"
         >
           Lihat semua menu kuliner yang tersedia

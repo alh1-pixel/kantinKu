@@ -3,8 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "EventKu",
-  description: "Katalog dan pemesanan tiket event sekolah",
+  title: "KantinKu",
+  description: "Katalog dan pemesanan berbagai macam kuliner di sekolah",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
