@@ -10,6 +10,14 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async rewrites() {
+    return [
+      {
+        source: "/menu/:id([^/]*\\D[^/]*)",
+        destination: "/halaman-tidak-ada",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
