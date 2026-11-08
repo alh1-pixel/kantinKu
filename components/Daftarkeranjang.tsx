@@ -110,7 +110,7 @@ export default function DaftarKeranjang() {
     if (cara === "antar" && kelasBersih.length < 3)
       return setGalat("Kelas wajib diisi, minimal 3 karakter.");
 
-    const pesanan: Pesanan = {
+    const pesanan = simpanRiwayat({
       nama: namaBersih,
       caraAmbil: cara,
       kelas: cara === "antar" ? kelasBersih : "",
@@ -123,10 +123,9 @@ export default function DaftarKeranjang() {
       diskon,
       ongkir,
       total,
-    };
-    simpanRiwayat(pesanan);
+    });
+
     simpanKeranjang([]);
-    setStruk(pesanan);
     setStruk(pesanan);
 
     setIsi([]);

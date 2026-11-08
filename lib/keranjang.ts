@@ -1,11 +1,11 @@
 import { menu, rupiah } from "@/data/menu";
 
-// Isi keranjang disimpan di localStorage (kunci "keranjang") berupa larik { id, jumlah }.
 export type ItemKeranjang = { id: number; jumlah: number };
 
 export type BarisPesanan = { nama: string; jumlah: number; subtotal: number };
 
 export type Pesanan = {
+  waktu: string;
   nama: string;
   caraAmbil: "ambil" | "antar";
   kelas: string;
@@ -79,13 +79,20 @@ export function cekKodePromo(
   return { berhasil: true, pesan: `Promo ${KODE_PROMO} dipakai: diskon 10%.` };
 }
 
-export function simpanRiwayat(pesanan: Pesanan) {
-  let lama: Pesanan[] = [];
+export function bacaRiwayat(): Pesanan[] {
   try {
     const data = JSON.parse(localStorage.getItem(KUNCI_RIWAYAT) ?? "[]");
-    if (Array.isArray(data)) lama = data;
+    return Array.isArray(data) ? data : [];
   } catch {
-    lama = [];
+    return [];
   }
-  localStorage.setItem(KUNCI_RIWAYAT, JSON.stringify([pesanan, ...lama]));
+}
+
+export function simpanRiwayat(data: Omit<Pesanan, "waktu">): Pesanan {
+  const pesanan: Pesanan = { waktu: new Date().toISOString(), ...data };
+  localStorage.setItem(
+    KUNCI_RIWAYAT,
+    JSON.stringify([pesanan, ...bacaRiwayat()]),
+  );
+  return pesanan;
 }
