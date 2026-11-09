@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { rupiah } from "@/data/menu";
-import { bacaRiwayat, type Pesanan } from "@/lib/keranjang";
+import { bacaRiwayat, hapusRiwayat, type Pesanan } from "@/lib/keranjang";
 
 function formatWaktu(iso?: string) {
   const d = iso ? new Date(iso) : null;
@@ -17,6 +17,17 @@ export default function DaftarRiwayat() {
     setRIwayat(bacaRiwayat());
   }, []);
 
+  function hapusSemua() {
+    if (
+      !window.confirm(
+        "Hapus seluruh riwayat pesanan? Tindakan ini tidak dapat dibatalkan",
+      )
+    )
+      return;
+    hapusRiwayat();
+    setRIwayat([]);
+  }
+
   if (riwayat === null) return <p>Memuat...</p>;
   if (riwayat.length === 0)
     return <p className="text-slate-500">Belum ada pesanan</p>;
@@ -25,9 +36,18 @@ export default function DaftarRiwayat() {
 
   return (
     <div className="space-y-4">
-      <p className="font-semibold">
-        {riwayat.length} pesanan, total belanja {rupiah(totalBelanja)}
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="font-semibold">
+          {riwayat.length} pesanan, total belanja {rupiah(totalBelanja)}
+        </p>
+        <button
+          type="button"
+          onClick={hapusSemua}
+          className="rounded border border-red-200 px-3 py-1 text-sm text-red-600 hover:bg-red-50"
+        >
+          Hapus riwayat
+        </button>
+      </div>
       <ul className="space-y-3">
         {riwayat.map((p, i) => (
           <li

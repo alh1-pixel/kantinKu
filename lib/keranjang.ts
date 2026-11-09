@@ -88,6 +88,10 @@ export function bacaRiwayat(): Pesanan[] {
   }
 }
 
+export function hapusRiwayat() {
+  localStorage.removeItem(KUNCI_RIWAYAT);
+}
+
 export function simpanRiwayat(data: Omit<Pesanan, "waktu">): Pesanan {
   const pesanan: Pesanan = { waktu: new Date().toISOString(), ...data };
   localStorage.setItem(
